@@ -177,15 +177,15 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 60% 52%;
+  object-position: 68% 61%;
 }
 
 .hero-art::after {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, var(--navy) 0%, #0a192ce8 10%, #0a192c52 36%, transparent 63%),
-    linear-gradient(0deg, #0a192cf0, transparent 23%);
+    linear-gradient(90deg, var(--navy) 0%, #0a192cf5 13%, #0a192cda 25%, #0a192c58 50%, transparent 76%),
+    linear-gradient(0deg, #0a192cee, transparent 24%);
   content: '';
 }
 
@@ -194,6 +194,9 @@ h3 {
   z-index: 1;
   right: clamp(18px, 3vw, 40px);
   bottom: 17px;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: #0a192cd9;
   color: #d1e7ec;
   font-family: var(--mono);
   font-size: 0.64rem;
@@ -535,14 +538,14 @@ h3 {
   width: 67%;
   height: 100%;
   object-fit: cover;
-  object-position: 57% 46%;
+  object-position: 66% 63%;
 }
 
 .page-hero::after {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: linear-gradient(90deg, var(--navy) 27%, #0a192cd9 47%, #0a192c38 83%);
+  background: linear-gradient(90deg, var(--navy) 31%, #0a192cec 47%, #0a192c75 70%, #0a192c1a);
   content: '';
 }
 
@@ -703,20 +706,17 @@ h3 {
   }
 
   .hero-art img {
-    object-position: 58% 22%;
+    object-position: 73% 52%;
   }
 
   .hero-art::after {
     background:
-      linear-gradient(180deg, transparent 3%, #0a192c3d 23%, #0a192cea 52%, var(--navy) 100%),
-      linear-gradient(90deg, #0a192c83, transparent 65%);
+      linear-gradient(180deg, transparent, #0a192c2b 10%, #0a192cc7 26%, #0a192cf2 52%, var(--navy)),
+      linear-gradient(90deg, #0a192c55, transparent 65%);
   }
 
   .image-caption {
     inset: 13px 13px auto auto;
-    padding: 3px 6px;
-    border-radius: 4px;
-    background: #0a192ce0;
     font-size: 0.55rem;
   }
 
@@ -781,7 +781,7 @@ h3 {
   }
 
   .page-hero::after {
-    background: linear-gradient(90deg, var(--navy), #0a192cba 40%, #0a192c48);
+    background: linear-gradient(90deg, var(--navy), #0a192ce6 40%, #0a192c90 76%, #0a192c75);
   }
 
   .footer-inner {
