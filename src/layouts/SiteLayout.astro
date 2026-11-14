@@ -1,0 +1,76 @@
+---
+import '@fontsource-variable/bricolage-grotesque/wght.css'
+import '@fontsource-variable/dm-sans/wght.css'
+import '@fontsource/ibm-plex-mono/latin-500.css'
+import '../styles/global.css'
+import { links, sitePath, workshop } from '../data/workshop'
+
+interface Props {
+  page: 'overview' | 'programme' | 'visit' | 'contact'
+  title?: string
+  description?: string
+}
+
+const { page, title, description = workshop.subtitle } = Astro.props
+const pageTitle = title ? `${title} | ${workshop.name}` : workshop.name
+const canonical = Astro.site && new URL(Astro.url.pathname, Astro.site)
+const cover = Astro.site && new URL(sitePath('images/vortex-flow.webp'), Astro.site)
+const navigation = [
+  { page: 'overview', href: sitePath(), title: 'Overview' },
+  { page: 'programme', href: sitePath('programme/'), title: 'Programme' },
+  { page: 'visit', href: sitePath('how-to-come/'), title: 'How to come' },
+  { page: 'contact', href: sitePath('contact/'), title: 'Contact' },
+]
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f7f7f1" />
+    <link rel="icon" type="image/png" href={sitePath('favicon.png')} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={workshop.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {cover && <meta property="og:image" content={cover} />}
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner content-width">
+        <a class="wordmark" href={sitePath()} aria-label="VORTEX Workshop home">
+          <img src={sitePath('favicon.png')} alt="" width="34" height="34" />
+          <span>VORTEX</span>
+        </a>
+        <nav class="site-nav" aria-label="Main navigation">
+          {navigation.map(item => (
+            <a href={item.href} aria-current={item.page === page ? 'page' : undefined}>
+              {item.title}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="content-width footer-inner">
+        <div class="footer-identity">
+          <a href={sitePath()}>{workshop.name}</a>
+          <p><time datetime={workshop.dateISO}>{workshop.date}</time> · {workshop.venue}, Saclay</p>
+        </div>
+        <p class="related-initiative">
+          In connection with the <a href={links.scienceFace}>ScienceFace initiative</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

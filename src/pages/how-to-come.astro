@@ -1,0 +1,28 @@
+---
+import PageHero from '../components/PageHero.astro'
+import SiteLayout from '../layouts/SiteLayout.astro'
+import { links, workshop } from '../data/workshop'
+---
+<SiteLayout page="visit" title="How to come" description="Directions to the Maison de la Simulation, Digiteo, CEA Saclay.">
+  <PageHero title="How to come" subtitle="Maison de la Simulation, Saclay" />
+  <section class="content-width section inner-section visit-grid" aria-labelledby="venue-title">
+    <div class="venue-card">
+      <h2 id="venue-title">Workshop venue</h2>
+      <address>
+        <strong>{workshop.venue}</strong><br />
+        Digiteo, Bâtiment 565 (PC190)<br />
+        CEA Saclay<br />
+        91191 Gif-sur-Yvette Cedex, France
+      </address>
+      <a class="text-link" href={links.map}>Open in Google Maps <span class="arrow arrow-external" aria-hidden="true"></span></a>
+    </div>
+
+    <div class="visit-copy">
+      <h2>Travel information</h2>
+      <p>The Maison de la Simulation’s access guide includes a map and directions by public transport.</p>
+      <a class="button button-dark" href={links.access}>
+        Official access guide <span class="arrow arrow-external" aria-hidden="true"></span>
+      </a>
+    </div>
+  </section>
+</SiteLayout>

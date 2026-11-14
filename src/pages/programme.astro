@@ -1,0 +1,15 @@
+---
+import PageHero from '../components/PageHero.astro'
+import SiteLayout from '../layouts/SiteLayout.astro'
+import { sitePath } from '../data/workshop'
+---
+<SiteLayout page="programme" title="Programme" description="The VORTEX Workshop programme is to be announced.">
+  <PageHero title="Programme" />
+  <section class="content-width section inner-section" aria-labelledby="status-heading">
+    <div class="notice">
+      <h2 id="status-heading">To be announced</h2>
+      <p>The workshop will combine invited technical presentations with interactive discussions. The detailed schedule will be posted here.</p>
+      <a class="text-link" href={sitePath('#topics')}>Explore the workshop topics <span class="arrow" aria-hidden="true"></span></a>
+    </div>
+  </section>
+</SiteLayout>

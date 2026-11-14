@@ -1,0 +1,20 @@
+---
+import PageHero from '../components/PageHero.astro'
+import SiteLayout from '../layouts/SiteLayout.astro'
+import { contacts } from '../data/workshop'
+---
+<SiteLayout page="contact" title="Contact" description="Contact the VORTEX Workshop organizers at CEA.">
+  <PageHero title="Contact" subtitle="Workshop organizers" />
+  <section class="content-width section inner-section" aria-label="Workshop contacts">
+    <ul class="contact-list">
+      {contacts.map(person => (
+        <li>
+          <h2>{person.name}</h2>
+          <a class="text-link" href={`mailto:${person.email}`}>
+            {person.email}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</SiteLayout>

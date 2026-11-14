@@ -1,0 +1,84 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro'
+import { links, sitePath, topics, workshop } from '../data/workshop'
+---
+<SiteLayout page="overview" description={`${workshop.expansion}. ${workshop.date}, Maison de la Simulation, Saclay.`}>
+  <section class="hero frame-width" aria-labelledby="workshop-title">
+    <div class="hero-main">
+      <div class="hero-art">
+        <img src={sitePath('images/vortex-flow.webp')} alt="" width="1280" height="1040" fetchpriority="high" />
+        <span class="image-caption">Illustrative flow field</span>
+      </div>
+      <div class="hero-content">
+        <p class="eyebrow">
+          <a href={links.exaDI}>Exa-DI · NumPEx workshop</a>
+        </p>
+        <h1 id="workshop-title">VORTEX<span class="sr-only"> Workshop</span></h1>
+        <p class="hero-expansion">{workshop.expansion}</p>
+        <p class="hero-subtitle">{workshop.subtitle}</p>
+        <div class="actions">
+          <a class="button button-accent" href={sitePath('programme/')}>
+            Programme <span class="arrow" aria-hidden="true"></span>
+          </a>
+          <a class="button button-ghost" href={sitePath('how-to-come/')}>How to come</a>
+        </div>
+      </div>
+    </div>
+    <dl class="event-facts">
+      <div class="event-fact">
+        <dt>Date</dt>
+        <dd><time datetime={workshop.dateISO}>{workshop.fullDate}</time></dd>
+      </div>
+      <div class="event-fact">
+        <dt>Venue</dt>
+        <dd><a href={sitePath('how-to-come/')}>{workshop.venue}, Saclay</a></dd>
+      </div>
+      <div class="event-fact">
+        <dt>Format</dt>
+        <dd>In-person workshop</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="content-width section intro" aria-labelledby="about-title">
+    <div class="intro-text">
+      <h2 id="about-title">From simulation data<br class="wide-break" /> to reusable AI models</h2>
+      <p>Foundation models for scientific computing need data they can learn from across codes and applications. Fluid simulations produce large volumes of spatiotemporal data across different physical regimes, numerical methods, meshes, geometries, and scales. That diversity makes it difficult to reuse models across simulations and experiments.</p>
+      <p>VORTEX brings together French and European experts in computational fluid dynamics, high-performance computing, scientific data representations, and AI. It will explore common formats and physics-aware tokenization methods for training and deploying models on heterogeneous simulation and experimental data.</p>
+    </div>
+
+    <aside class="affiliation" aria-labelledby="affiliation-title">
+      <h3 id="affiliation-title">Part of Exa-DI</h3>
+      <p>VORTEX takes place within <a href={links.exaDI}>Exa-DI (Development and Integration)</a>, a project of the <a href={links.numpex}>NumPEx</a> exascale research programme, supported by France 2030.</p>
+      <div class="affiliation-logos">
+        <a href={links.numpex}>
+          <img src={sitePath('images/numpex.png')} alt="NumPEx" width="850" height="791" />
+        </a>
+        <a href={links.france2030}>
+          <img src={sitePath('images/france-2030.jpg')} alt="France 2030" width="322" height="316" />
+        </a>
+      </div>
+    </aside>
+  </section>
+
+  <section class="content-width section topics" id="topics" aria-labelledby="topics-title">
+    <h2 id="topics-title">Workshop topics</h2>
+    <ul class="topic-list">
+      {topics.map(topic => (
+        <li>
+          <h3>{topic.title}</h3>
+          <p>{topic.description}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="content-width roadmap" aria-labelledby="roadmap-title">
+    <h2 id="roadmap-title">A shared research roadmap</h2>
+    <div>
+      <p>Invited technical talks and interactive discussions will help participants identify shared scientific requirements, evaluate existing approaches, and define open research questions.</p>
+      <p>The roadmap will outline priorities, potential collaborations, and demonstrator use cases, with particular attention to reusable software and scalable approaches for the NumPEx ecosystem.</p>
+      <a class="text-link" href={sitePath('programme/')}>Workshop programme <span class="arrow" aria-hidden="true"></span></a>
+    </div>
+  </section>
+</SiteLayout>
