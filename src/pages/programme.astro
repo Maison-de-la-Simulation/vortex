@@ -1,15 +1,217 @@
 ---
 import PageHero from '../components/PageHero.astro'
 import SiteLayout from '../layouts/SiteLayout.astro'
-import { sitePath } from '../data/workshop'
+import { workshop } from '../data/workshop'
+
+const programme = [
+  {
+    start: '09:30',
+    end: '10:00',
+    title: 'Welcome coffee',
+    isBreak: true,
+  },
+  {
+    start: '10:00',
+    end: '10:45',
+    title: 'Use case — Simulations of the Rayleigh–Taylor instability',
+    speaker: 'Benoit Joseph Gréa',
+  },
+  {
+    start: '10:45',
+    end: '11:30',
+    title: 'Use case — EDF applications',
+    speaker: 'Olivier Hurisse and collaborators',
+  },
+  {
+    start: '11:30',
+    end: '12:15',
+    title: 'Use case — TBD',
+  },
+  {
+    start: '12:15',
+    end: '14:00',
+    title: 'Lunch break',
+    isBreak: true,
+  },
+  {
+    start: '14:00',
+    end: '14:45',
+    title: 'Emergent Transfer of a Physics Foundation Model from Simulation to Laboratory Turbulence',
+    speaker: 'Cambridge group',
+  },
+  {
+    start: '14:45',
+    end: '15:30',
+    title: 'Mesh-Native Tokenisation: Retrofitting Foundation Models to Unstructured Data',
+    speaker: 'Cambridge group',
+  },
+  {
+    start: '15:30',
+    end: '16:00',
+    title: 'Coffee break',
+    isBreak: true,
+  },
+  {
+    start: '16:00',
+    end: '16:45',
+    title: 'Benchmarking Walrus and Poseidon',
+    speaker: 'Sage Osborne · Maison de la Simulation',
+  },
+  {
+    start: '16:45',
+    end: '17:00',
+    title: 'Round table and discussions',
+  },
+]
 ---
-<SiteLayout page="programme" title="Programme" description="The VORTEX Workshop programme is to be announced.">
+<SiteLayout
+  page="programme"
+  title="Programme"
+  description={`Preliminary programme of the VORTEX Workshop, ${workshop.date}, Maison de la Simulation, Saclay.`}
+>
   <PageHero title="Programme" />
-  <section class="content-width section inner-section" aria-labelledby="status-heading">
-    <div class="notice">
-      <h2 id="status-heading">To be announced</h2>
-      <p>The workshop will combine invited technical presentations with interactive discussions. The detailed schedule will be posted here.</p>
-      <a class="text-link" href={sitePath('#topics')}>Explore the workshop topics <span class="arrow" aria-hidden="true"></span></a>
+  <section class="content-width section inner-section" aria-labelledby="programme-heading">
+    <div class="programme-heading">
+      <h2 id="programme-heading">Preliminary programme</h2>
+      <p>All times are local to Saclay (CET).</p>
+    </div>
+    <div class="programme-card">
+      <table class="programme-schedule">
+        <caption class="sr-only">
+          Preliminary VORTEX Workshop programme for {workshop.fullDate}
+        </caption>
+        <colgroup>
+          <col class="programme-time-column" />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Session</th>
+          </tr>
+        </thead>
+        <tbody>
+          {programme.map(item => (
+            <tr class:list={{ 'programme-break': item.isBreak }}>
+              <th scope="row" aria-label={`${item.start} to ${item.end}`}>
+                <span class="programme-time-range">
+                  <time datetime={`${workshop.dateISO}T${item.start}:00+01:00`}>{item.start}</time>
+                  <span class="programme-dash" aria-hidden="true">–</span>
+                  <time datetime={`${workshop.dateISO}T${item.end}:00+01:00`}>{item.end}</time>
+                </span>
+              </th>
+              <td>
+                <p class="programme-session">{item.title}</p>
+                {item.speaker && <p class="programme-speaker">{item.speaker}</p>}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   </section>
 </SiteLayout>
+
+<style>
+  .programme-heading {
+    margin-bottom: 1.4rem;
+  }
+
+  .programme-heading p {
+    margin-top: 0.45rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .programme-card {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--white);
+  }
+
+  .programme-schedule {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: left;
+  }
+
+  .programme-time-column {
+    width: 10.5rem;
+  }
+
+  .programme-schedule th,
+  .programme-schedule td {
+    padding: 1rem 1.4rem;
+    vertical-align: top;
+  }
+
+  .programme-schedule thead th {
+    background: var(--paper);
+    color: var(--muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .programme-schedule tbody tr {
+    border-top: 1px solid var(--line);
+  }
+
+  .programme-schedule tbody th {
+    color: var(--blue);
+    font-family: var(--mono);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .programme-time-range {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    white-space: nowrap;
+  }
+
+  .programme-session {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .programme-speaker {
+    margin-top: 0.3rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .programme-break {
+    background: #f1f5f6;
+  }
+
+  .programme-break .programme-session {
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  @media (max-width: 520px) {
+    .programme-time-column {
+      width: 5.75rem;
+    }
+
+    .programme-schedule th,
+    .programme-schedule td {
+      padding: 0.9rem 0.85rem;
+    }
+
+    .programme-time-range {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .programme-dash {
+      display: none;
+    }
+  }
+</style>
